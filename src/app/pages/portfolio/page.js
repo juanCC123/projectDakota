@@ -5,7 +5,7 @@ import EmailSection from "@/app/components/component_portaf/EmailSection";
 import Footer from "@/app/components/component_portaf/Footer";
 import Navbar from "@/app/components/component_portaf/Navbar";
 
-export default function Home() {
+export default function portfolio() {
   return (
     <main className="flex min-h-screen flex-col bg-[#121212]">
       /* Cambiar colores del fondo */

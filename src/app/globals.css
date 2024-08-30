@@ -1,29 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-/* styles/globals.css */
 
-/* globals.css */
+
 
 ::-webkit-scrollbar {
-    width: 8px;
-    /* Ancho de la barra de desplazamiento */
+    width: 18px;
 }
 
 ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    /* Fondo de la pista de desplazamiento */
-    border-radius: 8px;
+    background: #1a1a1a;
+
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #00bfff;
-    /* Color del pulgar de desplazamiento */
-    border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, #00c6ff, #0072ff);
+
+    border-radius: 10px;
+
+    border: 3px solid #1a1a1a;
+
 }
 
+
 ::-webkit-scrollbar-thumb:hover {
-    background: #1e90ff;
-    /* Color del pulgar al pasar el ratón por encima */
+    background: linear-gradient(180deg, #00c6ff, #0072ff);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.6);
+
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: linear-gradient(180deg, #0072ff, #00c6ff);
+
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.9);
+
 }

@@ -11,11 +11,11 @@ export default function Home() {
     // Simular un tiempo de carga
     const timer = setTimeout(() => {
       setLoading(false);
-      router.push("/pages/portafolio"); // Redirige después de la carga
-    }, 3000); // 3 segundos de carga, puedes ajustar el tiempo
+      router.push("/pages/portfolio"); // Redirige después de la carga
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [router]); // Asegúrate de incluir router en las dependencias
+  }, [router]);
 
   return loading ? (
     <LoadingScreen />

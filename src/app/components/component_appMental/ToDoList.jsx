@@ -9,10 +9,9 @@ import {
   FaChevronUp,
   FaBrain,
   FaTrophy,
-  FaBolt,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
-import "@/../../public/style/todo.css"; // Asegúrate de que este archivo exista y esté en el mismo directorio
+import "@/../../public/style/todo.css";
 
 const ToDoList = () => {
   const [tasks, setTasks] = useState([]);
@@ -166,9 +165,16 @@ const ToDoList = () => {
     setEditSubtaskText("");
   };
 
+  // Manejar la tecla Enter
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      handleAddTask();
+      e.preventDefault(); // Evita el comportamiento por defecto del Enter
+      if (e.target.name === "taskInput") {
+        handleAddTask();
+      } else if (e.target.name === "subtaskInput") {
+        const taskId = e.target.dataset.taskId;
+        handleAddSubtask(parseInt(taskId, 10));
+      }
     }
   };
 
@@ -176,7 +182,7 @@ const ToDoList = () => {
     <div className="flex flex-col items-center p-8 space-y-6 bg-gray-100 min-h-screen">
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-6xl relative">
         <h1 className="text-5xl font-extrabold mb-6 mt-2 text-blue-600">
-          To-Do List
+          Cosas por hacer
         </h1>
         <div className="flex gap-4 mb-6 w-full">
           <input
@@ -184,6 +190,7 @@ const ToDoList = () => {
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             onKeyDown={handleKeyPress}
+            name="taskInput"
             className="flex-1 p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
             placeholder="Nueva tarea..."
           />
@@ -242,23 +249,23 @@ const ToDoList = () => {
                         {!task.completed && (
                           <button
                             onClick={() => handleCompleteTask(task.id)}
-                            className="text-green-600 hover:text-green-800 transition duration-300 text-xl">
+                            className="text-green-600 hover:text-green-800 transition duration-300">
                             <FaCheckCircle />
                           </button>
                         )}
                         <button
                           onClick={() => handleEditTask(task.id)}
-                          className="text-blue-600 hover:text-blue-800 transition duration-300 text-xl">
+                          className="text-blue-600 hover:text-blue-800 transition duration-300">
                           <FaPen />
                         </button>
                         <button
                           onClick={() => handleDeleteTask(task.id)}
-                          className="text-red-600 hover:text-red-800 transition duration-300 text-xl">
+                          className="text-red-600 hover:text-red-800 transition duration-300">
                           <FaTrashAlt />
                         </button>
                         <button
                           onClick={() => handleToggleSubtasks(task.id)}
-                          className="text-gray-600 hover:text-gray-800 transition duration-300 text-xl">
+                          className="text-gray-600 hover:text-gray-800 transition duration-300">
                           {task.showSubtasks ? (
                             <FaChevronUp />
                           ) : (
@@ -269,32 +276,17 @@ const ToDoList = () => {
                     </>
                   )}
                 </div>
-
                 {task.showSubtasks && (
-                  <div className="px-6 pb-4">
-                    <div className="flex gap-4 mb-4">
-                      <input
-                        type="text"
-                        value={subtaskText}
-                        onChange={(e) => setSubtaskText(e.target.value)}
-                        className="flex-1 p-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Nueva subtarea..."
-                      />
-                      <button
-                        onClick={() => handleAddSubtask(task.id)}
-                        className="bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center">
-                        <FaPlusCircle />
-                      </button>
-                    </div>
+                  <div className="bg-gray-100 border-t border-gray-300">
                     {task.subtasks.length === 0 && (
-                      <p className="text-gray-600 text-lg">No hay subtareas.</p>
+                      <p className="p-4 text-gray-600">No hay subtareas.</p>
                     )}
                     {task.subtasks.map((subtask) => (
                       <div
                         key={subtask.id}
-                        className={`flex justify-between items-center p-4 rounded-lg mb-2 ${
+                        className={`flex items-center justify-between p-4 border-b ${
                           subtask.completed
-                            ? "bg-green-100 border-green-400 line-through"
+                            ? "bg-green-50 border-green-200 line-through"
                             : "bg-white border-gray-300"
                         }`}>
                         {editingSubtask &&
@@ -326,17 +318,14 @@ const ToDoList = () => {
                           </div>
                         ) : (
                           <>
-                            <span className="text-lg flex items-center gap-2">
-                              <FaBolt className="text-yellow-500" />
-                              {subtask.text}
-                            </span>
-                            <div className="flex gap-3">
+                            <span className="flex-1">{subtask.text}</span>
+                            <div className="flex gap-2">
                               {!subtask.completed && (
                                 <button
                                   onClick={() =>
                                     handleCompleteSubtask(task.id, subtask.id)
                                   }
-                                  className="text-green-600 hover:text-green-800 transition duration-300 text-xl">
+                                  className="text-green-600 hover:text-green-800 transition duration-300">
                                   <FaCheckCircle />
                                 </button>
                               )}
@@ -344,14 +333,14 @@ const ToDoList = () => {
                                 onClick={() =>
                                   handleEditSubtask(task.id, subtask.id)
                                 }
-                                className="text-blue-600 hover:text-blue-800 transition duration-300 text-xl">
+                                className="text-blue-600 hover:text-blue-800 transition duration-300">
                                 <FaPen />
                               </button>
                               <button
                                 onClick={() =>
                                   handleDeleteSubtask(task.id, subtask.id)
                                 }
-                                className="text-red-600 hover:text-red-800 transition duration-300 text-xl">
+                                className="text-red-600 hover:text-red-800 transition duration-300">
                                 <FaTrashAlt />
                               </button>
                             </div>
@@ -359,6 +348,24 @@ const ToDoList = () => {
                         )}
                       </div>
                     ))}
+                    <div className="p-4 border-t border-gray-300">
+                      <input
+                        type="text"
+                        value={subtaskText}
+                        onChange={(e) => setSubtaskText(e.target.value)}
+                        onKeyDown={handleKeyPress}
+                        name="subtaskInput"
+                        data-task-id={task.id}
+                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        placeholder="Nueva subtarea..."
+                      />
+                      <button
+                        onClick={() => handleAddSubtask(task.id)}
+                        className="bg-blue-600 text-white px-4 py-2 mt-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center">
+                        <FaPlusCircle className="mr-2" />
+                        Agregar subtarea
+                      </button>
+                    </div>
                   </div>
                 )}
               </motion.div>
@@ -366,11 +373,11 @@ const ToDoList = () => {
           </AnimatePresence>
         </div>
       </div>
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-blue-600 text-white text-center">
-        <h2 className="text-xl flex items-center justify-center gap-2">
-          <FaTrophy className="text-yellow-400 text-2xl" />
-          Puntos: {points}
-        </h2>
+      <div className="fixed top-1 right-6 bg-white p-4 rounded-lg shadow-lg flex items-center space-x-2">
+        <div className="text-yellow-500 text-xl">
+          <FaTrophy />
+        </div>
+        <span className="text-xl font-semibold">Puntos: {points}</span>
       </div>
     </div>
   );
