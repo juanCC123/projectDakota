@@ -39,9 +39,9 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-8 flex flex-col items-center relative">
-      {/* Combined Header and Notebook */}
+      {}
       <div className="w-[90vw] max-w-screen-2xl bg-white shadow-2xl rounded-3xl p-6">
-        {/* Header with icons */}
+        {}
         <div className="flex justify-around w-full bg-gray-800 text-white p-6 rounded-t-3xl shadow-md mb-4">
           <a
             href="https://www.youtube.com"
@@ -61,7 +61,7 @@ export default function Home() {
           />
         </div>
 
-        {/* Notebook */}
+        {}
         <div className={`bg-white rounded-b-3xl p-6 ${font}`}>
           <textarea
             className="w-full h-36 p-6 border border-gray-400 rounded-3xl focus:outline-none focus:ring-2 focus:ring-blue-500 text-xl"
@@ -69,7 +69,7 @@ export default function Home() {
             onChange={(e) => setContent(e.target.value)}
             placeholder="Escribe aquí..."
           />
-          {/* Font Selector */}
+          {}
           <div className="mt-6">
             <label className="block text-gray-700 text-lg">
               Selecciona una fuente:
@@ -87,7 +87,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Animated Circles */}
+      {}
       {showCircles && (
         <div className="circle-container">
           <div className="circle"></div>
@@ -96,7 +96,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* Button to toggle circles visibility */}
+      {}
       <button
         className="toggle-btn"
         onClick={() => setShowCircles(!showCircles)}>

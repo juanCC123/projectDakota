@@ -7,32 +7,31 @@ const cards = [
     id: "1",
     title: "Diario personal",
     imageUrl: "/images/cards/book.jpg",
-    url: "/pages/notebook", // URL del componente que quieres abrir en una nueva pestaña
+    url: "/pages/notebook",
   },
   {
     id: "2",
     title: "Meditación",
     imageUrl: "/images/med.png",
-    url: "/pages/meditation", // Añade la URL correspondiente para Meditación
+    url: "/pages/meditation",
   },
   {
     id: "3",
     title: "Orden",
     imageUrl: "/images/orden.jpg",
-    url: "/pages/ToDoList", // URL del componente que quieres abrir en una nueva pestaña
+    url: "/pages/ToDoList",
   },
   {
     id: "4",
     title: "En proceso . . .",
     imageUrl: "/images/mantenimiento.png",
-    url: "/pages/maintenance", // Añade la URL correspondiente para En proceso
+    url: "/pages/maintenance",
   },
 ];
 
 const Cards = () => {
   const handleCardClick = (card) => {
     if (card.url) {
-      // Abre una nueva pestaña con la URL del componente
       window.open(card.url, "_blank");
     }
   };

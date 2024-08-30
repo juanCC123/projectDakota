@@ -1,28 +1,27 @@
-/* Container for animated circles */
 .circle-container {
     position: absolute;
     bottom: 50px;
-    /* Place the container closer to the bottom of the page */
+
     left: 50%;
     transform: translateX(-50%);
     height: 60px;
-    /* Adjust based on your design */
+
     width: 150px;
-    /* Adjust the width to fit the circles closer together */
+
     display: flex;
     justify-content: space-between;
 }
 
-/* Circle styles */
+
 .circle {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     animation: wave 4s infinite, colorChange 4s infinite;
-    /* Wave and color change animations */
+
 }
 
-/* Animation for wave effect */
+
 @keyframes wave {
 
     0%,
@@ -35,37 +34,37 @@
     }
 }
 
-/* Animation for color change */
+
 @keyframes colorChange {
     0% {
         background-color: #FF0000;
-        /* Red */
+
     }
 
     33% {
         background-color: #00FF00;
-        /* Green */
+
     }
 
     66% {
         background-color: #0000FF;
-        /* Blue */
+
     }
 
     100% {
         background-color: #FF0000;
-        /* Red */
+
     }
 }
 
-/* Button to toggle circles visibility */
+
 .toggle-btn {
     position: fixed;
-    /* Position fixed to stay at the bottom left */
+
     bottom: 20px;
-    /* Distance from the bottom */
+
     left: 20px;
-    /* Distance from the left */
+
     background-color: #007bff;
     color: white;
     border: none;
@@ -75,21 +74,21 @@
     cursor: pointer;
     font-size: 16px;
     transition: transform 0.3s;
-    /* Smooth transform transition */
+
 }
 
 .toggle-btn:hover {
     transform: scale(1.1);
-    /* Enlarge button on hover */
+
 }
 
-/* Icon styles */
+
 .icon {
     transition: transform 0.3s;
-    /* Smooth transition for scaling */
+
 }
 
 .icon:hover {
     transform: scale(1.2);
-    /* Enlarge icon on hover */
+
 }

@@ -5,7 +5,7 @@ import { faCog, faUser } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 
 const motivationalMessages = [
-  "PUEDES DAR MAS DE TI",
+  "PUEDES DAR MAS DE TI :)",
   "CONFÍA EN EL PROCESO PARA TRIUNFAR",
   "DISFRUTA, NO TE AMARGUES LA VIDA",
 ];
@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 w-full bg-blue-300 shadow-lg z-10">
       <div className="container mx-auto flex items-center justify-between p-4 md:p-6">
-        {/* Mascota y Mensajes */}
+        {}
         <div className="flex items-center space-x-4">
           <motion.img
             src="/images/bichon-frise.gif"
@@ -47,7 +47,7 @@ const Header = () => {
           </motion.div>
         </div>
 
-        {/* Iconos y Texto Diario */}
+        {}
         <div className="flex items-center space-x-6">
           <motion.a
             href="#"

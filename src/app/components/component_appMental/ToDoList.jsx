@@ -165,10 +165,9 @@ const ToDoList = () => {
     setEditSubtaskText("");
   };
 
-  // Manejar la tecla Enter
   const handleKeyPress = (e) => {
     if (e.key === "Enter") {
-      e.preventDefault(); // Evita el comportamiento por defecto del Enter
+      e.preventDefault();
       if (e.target.name === "taskInput") {
         handleAddTask();
       } else if (e.target.name === "subtaskInput") {

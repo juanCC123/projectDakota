@@ -8,7 +8,6 @@ import Navbar from "@/app/components/component_portaf/Navbar";
 export default function portfolio() {
   return (
     <main className="flex min-h-screen flex-col bg-[#121212]">
-      /* Cambiar colores del fondo */
       <Navbar />
       <div className="container mt-24 mx-auto px-12 py-4">
         <HeroSection />

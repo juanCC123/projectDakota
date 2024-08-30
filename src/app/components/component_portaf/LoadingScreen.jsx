@@ -7,7 +7,7 @@ import loadingAnimation from "@/../public/loading.json";
 const LoadingScreen = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-sky-200 z-50">
-      {/* Contenido principal */}
+      {}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
