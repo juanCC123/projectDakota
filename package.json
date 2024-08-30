@@ -1,0 +1,47 @@
+{
+  "name": "portfolio-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@heroicons/react": "^2.0.18",
+    "@radix-ui/react-tooltip": "^1.1.2",
+    "@react-spring/web": "^9.7.4",
+    "axios": "^1.7.4",
+    "docx": "^8.5.0",
+    "draft-js": "^0.11.7",
+    "embla-carousel": "^8.2.0",
+    "eslint": "8.47.0",
+    "eslint-config-next": "13.4.15",
+    "file-saver": "^2.0.5",
+    "framer-motion": "^10.18.0",
+    "html-docx-js": "^0.3.1",
+    "lottie-react": "^2.4.0",
+    "next": "^13.5.6",
+    "react": "18.2.0",
+    "react-animated-numbers": "^0.16.0",
+    "react-big-calendar": "^1.13.4",
+    "react-calendar": "^5.0.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^5.3.0",
+    "react-slick": "^0.30.2",
+    "react-type-animation": "^3.1.0",
+    "react-youtube": "^10.1.0",
+    "resend": "^1.0.0",
+    "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.12"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.41",
+    "tailwindcss": "^3.4.10"
+  }
+}
