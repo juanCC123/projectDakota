@@ -114,6 +114,7 @@ const ToDoList = () => {
           : task
       )
     );
+    setPoints(points + 0.5); // Añadir 0.5 puntos por sub-tarea completada
   };
 
   const handleDeleteSubtask = (taskId, subtaskId) => {
@@ -279,7 +280,7 @@ const ToDoList = () => {
                 </div>
                 {task.showSubtasks && (
                   <div className="border-t border-gray-300 pt-4 px-6">
-                    <div className="flex items-center gap-2 mb-4">
+                    <div className="flex flex-col sm:flex-row items-center gap-2 mb-4">
                       <input
                         type="text"
                         value={subtaskText}
@@ -299,7 +300,9 @@ const ToDoList = () => {
                       </button>
                     </div>
                     {task.subtasks.length === 0 && (
-                      <p className="text-gray-600 text-sm">No hay subtareas.</p>
+                      <p className="text-gray-600 text-sm sm:text-base">
+                        No hay subtareas.
+                      </p>
                     )}
                     {task.subtasks.map((subtask) => (
                       <motion.div
@@ -342,7 +345,9 @@ const ToDoList = () => {
                           </div>
                         ) : (
                           <>
-                            <span className="flex-1">{subtask.text}</span>
+                            <span className="flex-1 text-sm sm:text-base">
+                              {subtask.text}
+                            </span>
                             <div className="flex gap-2">
                               {!subtask.completed && (
                                 <button
@@ -378,8 +383,10 @@ const ToDoList = () => {
             ))}
           </AnimatePresence>
         </div>
-        <div className="absolute bottom-1 right-2 bg-blue-100 p-1 rounded-md shadow-md text-gray-800 text-sm font-medium">
-          Puntos: {points}
+        <div className="absolute bottom-4 right-4">
+          <span className="text-gray-600 text-lg sm:text-xl">
+            Puntos: {points}
+          </span>
         </div>
       </div>
     </div>
