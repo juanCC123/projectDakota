@@ -15,11 +15,8 @@ const OrientationWarning = () => {
       }
     };
 
-    // Verificar la orientación al montar el componente
-    if (typeof window !== "undefined") {
-      handleResize();
-      window.addEventListener("resize", handleResize);
-    }
+    handleResize(); // Verificar la orientación al montar el componente
+    window.addEventListener("resize", handleResize);
 
     return () => {
       if (typeof window !== "undefined") {
@@ -28,8 +25,8 @@ const OrientationWarning = () => {
     };
   }, []);
 
-  if (!isLandscape) {
-    return (
+  return (
+    !isLandscape && (
       <div className="orientation-warning">
         <h1>Por favor, rota tu dispositivo a orientación horizontal.</h1>
         <style jsx>{`
@@ -46,13 +43,12 @@ const OrientationWarning = () => {
             top: 0;
             left: 0;
             z-index: 9999;
+            overflow: hidden;
           }
         `}</style>
       </div>
-    );
-  }
-
-  return null;
+    )
+  );
 };
 
 export default OrientationWarning;
