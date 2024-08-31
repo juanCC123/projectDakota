@@ -8,7 +8,6 @@ import {
   FaChevronDown,
   FaChevronUp,
   FaBrain,
-  FaTrophy,
 } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
 import "@/../../public/style/todo.css";
@@ -276,107 +275,107 @@ const ToDoList = () => {
                   )}
                 </div>
                 {task.showSubtasks && (
-                  <div className="bg-gray-100 border-t border-gray-300">
-                    {task.subtasks.length === 0 && (
-                      <p className="p-4 text-gray-600">No hay subtareas.</p>
-                    )}
-                    {task.subtasks.map((subtask) => (
-                      <div
-                        key={subtask.id}
-                        className={`flex items-center justify-between p-4 border-b ${
-                          subtask.completed
-                            ? "bg-green-50 border-green-200 line-through"
-                            : "bg-white border-gray-300"
-                        }`}>
-                        {editingSubtask &&
-                        editingSubtask.taskId === task.id &&
-                        editingSubtask.subtaskId === subtask.id ? (
-                          <div className="flex-1">
-                            <input
-                              type="text"
-                              value={editSubtaskText}
-                              onChange={(e) =>
-                                setEditSubtaskText(e.target.value)
-                              }
-                              className="w-full p-2 border border-gray-300 rounded-lg"
-                            />
-                            <div className="flex gap-2 mt-2">
-                              <button
-                                onClick={() =>
-                                  handleSaveEditSubtask(task.id, subtask.id)
-                                }
-                                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
-                                Guardar
-                              </button>
-                              <button
-                                onClick={handleCancelEditSubtask}
-                                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
-                                Cancelar
-                              </button>
-                            </div>
-                          </div>
-                        ) : (
-                          <>
-                            <span className="flex-1">{subtask.text}</span>
-                            <div className="flex gap-2">
-                              {!subtask.completed && (
-                                <button
-                                  onClick={() =>
-                                    handleCompleteSubtask(task.id, subtask.id)
-                                  }
-                                  className="text-green-600 hover:text-green-800 transition duration-300">
-                                  <FaCheckCircle />
-                                </button>
-                              )}
-                              <button
-                                onClick={() =>
-                                  handleEditSubtask(task.id, subtask.id)
-                                }
-                                className="text-blue-600 hover:text-blue-800 transition duration-300">
-                                <FaPen />
-                              </button>
-                              <button
-                                onClick={() =>
-                                  handleDeleteSubtask(task.id, subtask.id)
-                                }
-                                className="text-red-600 hover:text-red-800 transition duration-300">
-                                <FaTrashAlt />
-                              </button>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    ))}
-                    <div className="p-4 border-t border-gray-300">
+                  <div className="px-6 pb-6">
+                    <div className="flex gap-4">
                       <input
                         type="text"
                         value={subtaskText}
                         onChange={(e) => setSubtaskText(e.target.value)}
                         onKeyDown={handleKeyPress}
-                        name="subtaskInput"
                         data-task-id={task.id}
-                        className="w-full p-2 border border-gray-300 rounded-lg"
+                        name="subtaskInput"
+                        className="flex-1 p-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Nueva subtarea..."
                       />
                       <button
                         onClick={() => handleAddSubtask(task.id)}
-                        className="bg-blue-600 text-white px-4 py-2 mt-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center">
-                        <FaPlusCircle className="mr-2" />
-                        Agregar subtarea
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-lg">
+                        <FaPlusCircle />
                       </button>
                     </div>
+                    <ul className="mt-4">
+                      {task.subtasks.map((subtask) => (
+                        <li
+                          key={subtask.id}
+                          className={`flex justify-between items-center p-4 rounded-lg shadow-md ${
+                            subtask.completed
+                              ? "bg-green-100 border-green-400 line-through"
+                              : "bg-gray-100 border-gray-300"
+                          }`}>
+                          {editingSubtask &&
+                          editingSubtask.taskId === task.id &&
+                          editingSubtask.subtaskId === subtask.id ? (
+                            <div className="flex-1">
+                              <input
+                                type="text"
+                                value={editSubtaskText}
+                                onChange={(e) =>
+                                  setEditSubtaskText(e.target.value)
+                                }
+                                className="w-full p-2 border border-gray-300 rounded-lg"
+                              />
+                              <div className="flex gap-2 mt-2">
+                                <button
+                                  onClick={() =>
+                                    handleSaveEditSubtask(task.id, subtask.id)
+                                  }
+                                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                                  Guardar
+                                </button>
+                                <button
+                                  onClick={handleCancelEditSubtask}
+                                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                                  Cancelar
+                                </button>
+                              </div>
+                            </div>
+                          ) : (
+                            <>
+                              <span className="text-lg flex items-center gap-2">
+                                <FaBrain className="text-skin-tone" />
+                                {subtask.text}
+                              </span>
+                              <div className="flex gap-3">
+                                {!subtask.completed && (
+                                  <button
+                                    onClick={() =>
+                                      handleCompleteSubtask(task.id, subtask.id)
+                                    }
+                                    className="text-green-600 hover:text-green-800 transition duration-300">
+                                    <FaCheckCircle />
+                                  </button>
+                                )}
+                                <button
+                                  onClick={() =>
+                                    handleEditSubtask(task.id, subtask.id)
+                                  }
+                                  className="text-blue-600 hover:text-blue-800 transition duration-300">
+                                  <FaPen />
+                                </button>
+                                <button
+                                  onClick={() =>
+                                    handleDeleteSubtask(task.id, subtask.id)
+                                  }
+                                  className="text-red-600 hover:text-red-800 transition duration-300">
+                                  <FaTrashAlt />
+                                </button>
+                              </div>
+                            </>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
-      </div>
-      <div className="fixed top-1 right-6 bg-white p-4 rounded-lg shadow-lg flex items-center space-x-2">
-        <div className="text-yellow-500 text-xl">
-          <FaTrophy />
+        <div className="mt-6 flex justify-center items-center">
+          <h2 className="text-2xl font-semibold text-gray-700">
+            Puntos: {points}
+          </h2>
         </div>
-        <span className="text-xl font-semibold">Puntos: {points}</span>
       </div>
     </div>
   );
