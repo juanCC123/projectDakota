@@ -3,7 +3,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import NavLink from "./NavLink";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
-import MenuOverlay from "./MenuOverlay";
 
 const navLinks = [
   {
@@ -37,6 +36,7 @@ const Navbar = () => {
         <Link href="/" className="text-xl sm:text-2xl font-semibold text-white">
           DAKOTA ES
         </Link>
+        {/* Botón de menú para móviles */}
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setNavbarOpen(!navbarOpen)}
@@ -48,11 +48,9 @@ const Navbar = () => {
             )}
           </button>
         </div>
-        <div
-          className={`md:flex md:space-x-4 ${
-            navbarOpen ? "hidden" : "block"
-          } absolute md:static bg-[#121212] md:bg-transparent w-full md:w-auto top-full left-0 md:top-auto md:left-auto border-t md:border-0 border-[#33353F]`}>
-          <ul className="flex flex-col md:flex-row md:space-x-4 mt-2 md:mt-0 text-sm sm:text-base">
+        {/* Menú para dispositivos grandes */}
+        <div className="hidden md:flex md:space-x-4">
+          <ul className="flex space-x-4 text-sm sm:text-base">
             {navLinks.map((link, index) => (
               <li key={index}>
                 <NavLink
@@ -65,9 +63,24 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {navbarOpen && (
-        <MenuOverlay links={navLinks} closeMenu={() => setNavbarOpen(false)} />
-      )}
+      {/* Menú desplegable en móviles */}
+      <div
+        className={`md:hidden fixed top-16 left-0 right-0 bg-[#121212] border-t border-[#33353F] transition-transform transform ${
+          navbarOpen ? "translate-y-0" : "-translate-y-full"
+        }`}>
+        <ul className="flex flex-col text-sm sm:text-base">
+          {navLinks.map((link, index) => (
+            <li key={index}>
+              <NavLink
+                href={link.path}
+                title={link.title}
+                newTab={link.newTab}
+                onClick={() => setNavbarOpen(false)} // Cierra el menú al hacer clic en un enlace
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </nav>
   );
 };
