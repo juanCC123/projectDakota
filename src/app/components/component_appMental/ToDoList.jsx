@@ -177,30 +177,33 @@ const ToDoList = () => {
   };
 
   return (
-    <div className="flex flex-col items-center p-8 space-y-6 bg-gray-100 min-h-screen">
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-6xl relative">
-        <h1 className="text-5xl font-extrabold mb-6 mt-2 text-blue-600">
+    <div className="flex flex-col items-center p-4 sm:p-8 space-y-6 bg-gray-100 min-h-screen">
+      <div className="bg-white shadow-lg rounded-lg p-4 sm:p-8 w-full max-w-4xl relative">
+        <h1 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 mt-1 text-blue-600">
           Cosas por hacer
         </h1>
-        <div className="flex gap-4 mb-6 w-full">
+
+        <div className="flex flex-col sm:flex-row gap-4 mb-4 sm:mb-6 w-full">
           <input
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
             onKeyDown={handleKeyPress}
             name="taskInput"
-            className="flex-1 p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-lg"
+            className="flex-1 p-2 sm:p-4 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base sm:text-lg"
             placeholder="Nueva tarea..."
           />
           <button
             onClick={handleAddTask}
-            className="bg-blue-600 text-white p-4 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-xl">
+            className="bg-blue-600 text-white p-2 sm:p-4 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-lg sm:text-xl">
             <FaPlusCircle />
           </button>
         </div>
         <div className="w-full">
           {tasks.length === 0 && (
-            <p className="text-gray-600 text-lg">No hay tareas pendientes.</p>
+            <p className="text-gray-600 text-base sm:text-lg">
+              No hay tareas pendientes.
+            </p>
           )}
           <AnimatePresence>
             {tasks.map((task) => (
@@ -215,7 +218,7 @@ const ToDoList = () => {
                     ? "bg-green-100 border-green-400 line-through"
                     : "bg-white border-gray-300"
                 }`}>
-                <div className="flex justify-between items-center p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-4 sm:p-6">
                   {editingTaskId === task.id ? (
                     <div className="flex-1">
                       <input
@@ -239,11 +242,11 @@ const ToDoList = () => {
                     </div>
                   ) : (
                     <>
-                      <span className="text-lg flex items-center gap-2">
+                      <span className="text-base sm:text-lg flex items-center gap-2">
                         <FaBrain className="text-skin-tone" />
                         {task.text}
                       </span>
-                      <div className="flex gap-3">
+                      <div className="flex gap-3 mt-2 sm:mt-0">
                         {!task.completed && (
                           <button
                             onClick={() => handleCompleteTask(task.id)}
@@ -275,106 +278,108 @@ const ToDoList = () => {
                   )}
                 </div>
                 {task.showSubtasks && (
-                  <div className="px-6 pb-6">
-                    <div className="flex gap-4">
+                  <div className="border-t border-gray-300 pt-4 px-6">
+                    <div className="flex items-center gap-2 mb-4">
                       <input
                         type="text"
                         value={subtaskText}
                         onChange={(e) => setSubtaskText(e.target.value)}
-                        onKeyDown={handleKeyPress}
+                        onKeyDown={(e) =>
+                          e.key === "Enter" && handleAddSubtask(task.id)
+                        }
                         data-task-id={task.id}
                         name="subtaskInput"
-                        className="flex-1 p-2 border border-gray-300 rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        placeholder="Nueva subtarea..."
+                        className="flex-1 p-2 border border-gray-300 rounded-lg"
+                        placeholder="Nueva sub-tarea..."
                       />
                       <button
                         onClick={() => handleAddSubtask(task.id)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-lg">
-                        <FaPlusCircle />
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
+                        Agregar
                       </button>
                     </div>
-                    <ul className="mt-4">
-                      {task.subtasks.map((subtask) => (
-                        <li
-                          key={subtask.id}
-                          className={`flex justify-between items-center p-4 rounded-lg shadow-md ${
-                            subtask.completed
-                              ? "bg-green-100 border-green-400 line-through"
-                              : "bg-gray-100 border-gray-300"
-                          }`}>
-                          {editingSubtask &&
-                          editingSubtask.taskId === task.id &&
-                          editingSubtask.subtaskId === subtask.id ? (
-                            <div className="flex-1">
-                              <input
-                                type="text"
-                                value={editSubtaskText}
-                                onChange={(e) =>
-                                  setEditSubtaskText(e.target.value)
+                    {task.subtasks.length === 0 && (
+                      <p className="text-gray-600 text-sm">No hay subtareas.</p>
+                    )}
+                    {task.subtasks.map((subtask) => (
+                      <motion.div
+                        key={subtask.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
+                        className={`flex items-center justify-between p-2 mb-2 rounded-lg border ${
+                          subtask.completed
+                            ? "bg-green-100 border-green-400 line-through"
+                            : "bg-white border-gray-300"
+                        }`}>
+                        {editingSubtask &&
+                        editingSubtask.subtaskId === subtask.id &&
+                        editingSubtask.taskId === task.id ? (
+                          <div className="flex-1">
+                            <input
+                              type="text"
+                              value={editSubtaskText}
+                              onChange={(e) =>
+                                setEditSubtaskText(e.target.value)
+                              }
+                              className="w-full p-2 border border-gray-300 rounded-lg"
+                            />
+                            <div className="flex gap-2 mt-2">
+                              <button
+                                onClick={() =>
+                                  handleSaveEditSubtask(task.id, subtask.id)
                                 }
-                                className="w-full p-2 border border-gray-300 rounded-lg"
-                              />
-                              <div className="flex gap-2 mt-2">
-                                <button
-                                  onClick={() =>
-                                    handleSaveEditSubtask(task.id, subtask.id)
-                                  }
-                                  className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
-                                  Guardar
-                                </button>
-                                <button
-                                  onClick={handleCancelEditSubtask}
-                                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
-                                  Cancelar
-                                </button>
-                              </div>
+                                className="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition duration-300">
+                                Guardar
+                              </button>
+                              <button
+                                onClick={handleCancelEditSubtask}
+                                className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+                                Cancelar
+                              </button>
                             </div>
-                          ) : (
-                            <>
-                              <span className="text-lg flex items-center gap-2">
-                                <FaBrain className="text-skin-tone" />
-                                {subtask.text}
-                              </span>
-                              <div className="flex gap-3">
-                                {!subtask.completed && (
-                                  <button
-                                    onClick={() =>
-                                      handleCompleteSubtask(task.id, subtask.id)
-                                    }
-                                    className="text-green-600 hover:text-green-800 transition duration-300">
-                                    <FaCheckCircle />
-                                  </button>
-                                )}
+                          </div>
+                        ) : (
+                          <>
+                            <span className="flex-1">{subtask.text}</span>
+                            <div className="flex gap-2">
+                              {!subtask.completed && (
                                 <button
                                   onClick={() =>
-                                    handleEditSubtask(task.id, subtask.id)
+                                    handleCompleteSubtask(task.id, subtask.id)
                                   }
-                                  className="text-blue-600 hover:text-blue-800 transition duration-300">
-                                  <FaPen />
+                                  className="text-green-600 hover:text-green-800 transition duration-300">
+                                  <FaCheckCircle />
                                 </button>
-                                <button
-                                  onClick={() =>
-                                    handleDeleteSubtask(task.id, subtask.id)
-                                  }
-                                  className="text-red-600 hover:text-red-800 transition duration-300">
-                                  <FaTrashAlt />
-                                </button>
-                              </div>
-                            </>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
+                              )}
+                              <button
+                                onClick={() =>
+                                  handleEditSubtask(task.id, subtask.id)
+                                }
+                                className="text-blue-600 hover:text-blue-800 transition duration-300">
+                                <FaPen />
+                              </button>
+                              <button
+                                onClick={() =>
+                                  handleDeleteSubtask(task.id, subtask.id)
+                                }
+                                className="text-red-600 hover:text-red-800 transition duration-300">
+                                <FaTrashAlt />
+                              </button>
+                            </div>
+                          </>
+                        )}
+                      </motion.div>
+                    ))}
                   </div>
                 )}
               </motion.div>
             ))}
           </AnimatePresence>
         </div>
-        <div className="mt-6 flex justify-center items-center">
-          <h2 className="text-2xl font-semibold text-gray-700">
-            Puntos: {points}
-          </h2>
+        <div className="absolute bottom-1 right-2 bg-blue-100 p-1 rounded-md shadow-md text-gray-800 text-sm font-medium">
+          Puntos: {points}
         </div>
       </div>
     </div>
