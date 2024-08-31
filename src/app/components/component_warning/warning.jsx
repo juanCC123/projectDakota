@@ -2,20 +2,23 @@
 import React, { useEffect, useState } from "react";
 
 const OrientationWarning = () => {
-  const [isLandscape, setIsLandscape] = useState(
-    window.innerHeight <= window.innerWidth
-  );
-
-  const handleResize = () => {
-    setIsLandscape(window.innerHeight <= window.innerWidth);
-  };
+  const [isLandscape, setIsLandscape] = useState(true);
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize(); // Verificar la orientación al montar el componente
+    const handleResize = () => {
+      setIsLandscape(window.innerHeight <= window.innerWidth);
+    };
+
+    // Verificar la orientación al montar el componente
+    if (typeof window !== "undefined") {
+      handleResize();
+      window.addEventListener("resize", handleResize);
+    }
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("resize", handleResize);
+      }
     };
   }, []);
 
