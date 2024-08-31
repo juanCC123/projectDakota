@@ -2,45 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Estilos generales */
-body {
-    margin: 0;
-    padding: 0;
-}
-
-/* Ocultar contenido y mostrar advertencia en orientación vertical */
-.orientation-warning {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
-    background: #f8d7da;
-    color: #721c24;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    font-size: 1.5em;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-}
-
-.content {
-    display: none;
-}
-
-/* Mostrar contenido y ocultar advertencia en orientación horizontal */
-@media (orientation: landscape) {
-    .orientation-warning {
-        display: none;
-    }
-
-    .content {
-        display: block;
-    }
-}
-
 
 ::-webkit-scrollbar {
     width: 18px;
