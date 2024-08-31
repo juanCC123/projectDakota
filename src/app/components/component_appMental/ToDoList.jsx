@@ -381,7 +381,7 @@ const ToDoList = () => {
             ))}
           </AnimatePresence>
         </div>
-        <div className="absolute bottom-2 right-2">
+        <div className="absolute bottom-1 right-2">
           <span className="text-gray-600 text-sm sm:text-base">
             Puntos: {points}
           </span>
