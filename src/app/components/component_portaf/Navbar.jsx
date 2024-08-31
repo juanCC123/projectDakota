@@ -50,7 +50,7 @@ const Navbar = () => {
         </div>
         <div
           className={`md:flex ${
-            navbarOpen ? "block" : "hidden"
+            navbarOpen ? "hidden" : "block"
           } absolute md:static bg-[#121212] md:bg-transparent w-full md:w-auto top-full left-0 md:top-auto md:left-auto border-t md:border-0 border-[#33353F]`}>
           <ul className="flex flex-col md:flex-row md:space-x-4 mt-2 md:mt-0 md:space-x-6 text-sm sm:text-base">
             {navLinks.map((link, index) => (
@@ -65,7 +65,9 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {navbarOpen && <MenuOverlay links={navLinks} />}
+      {navbarOpen && (
+        <MenuOverlay links={navLinks} closeMenu={() => setNavbarOpen(false)} />
+      )}
     </nav>
   );
 };
