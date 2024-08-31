@@ -3,6 +3,45 @@
 @tailwind utilities;
 
 
+/* Estilo general */
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ocultar el contenido en orientación vertical */
+@media (orientation: portrait) {
+    .orientation-warning {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+        background: #f8d7da;
+        color: #721c24;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        font-size: 1.5em;
+        z-index: 1000;
+        position: fixed;
+    }
+
+    .content {
+        display: none;
+    }
+}
+
+/* Mostrar el contenido en orientación horizontal */
+@media (orientation: landscape) {
+    .orientation-warning {
+        display: none;
+    }
+
+    .content {
+        display: block;
+    }
+}
+
 
 ::-webkit-scrollbar {
     width: 18px;
