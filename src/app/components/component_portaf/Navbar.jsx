@@ -38,21 +38,20 @@ const Navbar = () => {
           DAKOTA ES
         </Link>
         <div className="md:hidden flex items-center">
-          {!navbarOpen ? (
-            <button
-              onClick={() => setNavbarOpen(true)}
-              className="text-white p-2 rounded hover:bg-gray-700">
-              <Bars3Icon className="h-6 w-6" />
-            </button>
-          ) : (
-            <button
-              onClick={() => setNavbarOpen(false)}
-              className="text-white p-2 rounded hover:bg-gray-700">
+          <button
+            onClick={() => setNavbarOpen(!navbarOpen)}
+            className="text-white p-2 rounded hover:bg-gray-700">
+            {navbarOpen ? (
               <XMarkIcon className="h-6 w-6" />
-            </button>
-          )}
+            ) : (
+              <Bars3Icon className="h-6 w-6" />
+            )}
+          </button>
         </div>
-        <div className={`md:flex ${navbarOpen ? "block" : "hidden"}`}>
+        <div
+          className={`md:flex ${
+            navbarOpen ? "block" : "hidden"
+          } absolute md:static bg-[#121212] md:bg-transparent w-full md:w-auto top-full left-0 md:top-auto md:left-auto border-t md:border-0 border-[#33353F]`}>
           <ul className="flex flex-col md:flex-row md:space-x-4 mt-2 md:mt-0 md:space-x-6 text-sm sm:text-base">
             {navLinks.map((link, index) => (
               <li key={index}>
@@ -66,7 +65,7 @@ const Navbar = () => {
           </ul>
         </div>
       </div>
-      {navbarOpen ? <MenuOverlay links={navLinks} /> : null}
+      {navbarOpen && <MenuOverlay links={navLinks} />}
     </nav>
   );
 };
