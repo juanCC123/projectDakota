@@ -26,28 +26,29 @@ const OrientationWarning = () => {
   }, []);
 
   return (
-    !isLandscape && (
-      <div className="orientation-warning">
-        <h1>Por favor, rota tu dispositivo a orientación horizontal.</h1>
-        <style jsx>{`
-          .orientation-warning {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            overflow: hidden;
-          }
-        `}</style>
-      </div>
-    )
+    <div className={`orientation-warning ${isLandscape ? "hidden" : ""}`}>
+      <h1>Por favor, rota tu dispositivo a orientación horizontal.</h1>
+      <style jsx>{`
+        .orientation-warning {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          width: 100vw;
+          background: rgba(0, 0, 0, 0.8);
+          color: white;
+          text-align: center;
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 9999;
+          overflow: hidden;
+        }
+        .hidden {
+          display: none;
+        }
+      `}</style>
+    </div>
   );
 };
 

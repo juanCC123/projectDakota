@@ -1,11 +1,14 @@
+/* Contenedor principal de las tarjetas */
 .carousel-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
+    margin-top: 80px;
+    /* Ajusta este valor según la altura de tu encabezado */
 }
 
-
+/* Contenedor de las tarjetas */
 .cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -13,7 +16,7 @@
     justify-content: center;
 }
 
-
+/* Estilos de la tarjeta */
 .card {
     width: 300px;
     height: 200px;
@@ -50,10 +53,9 @@
     background-color: #fff;
 }
 
-
+/* Contenedor del componente externo (si aplica) */
 .external-component-container {
     margin-top: 20px;
-
     width: 100%;
     display: flex;
     justify-content: center;
