@@ -285,9 +285,7 @@ const ToDoList = () => {
                         type="text"
                         value={subtaskText}
                         onChange={(e) => setSubtaskText(e.target.value)}
-                        onKeyDown={(e) =>
-                          e.key === "Enter" && handleAddSubtask(task.id)
-                        }
+                        onKeyDown={handleKeyPress}
                         data-task-id={task.id}
                         name="subtaskInput"
                         className="flex-1 p-2 border border-gray-300 rounded-lg"
@@ -295,8 +293,8 @@ const ToDoList = () => {
                       />
                       <button
                         onClick={() => handleAddSubtask(task.id)}
-                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300">
-                        Agregar
+                        className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center justify-center text-lg sm:text-xl">
+                        <FaPlusCircle />
                       </button>
                     </div>
                     {task.subtasks.length === 0 && (
