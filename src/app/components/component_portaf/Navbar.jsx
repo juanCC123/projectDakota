@@ -31,12 +31,11 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] border-b border-[#33353F]">
-      <div className="container mx-auto flex items-center justify-between px-4 py-2 sm:px-6 sm:py-3">
+    <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] border-b border-[#33353F] h-16">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2 sm:px-6 sm:py-3 h-full">
         <Link href="/" className="text-xl sm:text-2xl font-semibold text-white">
           DAKOTA ES
         </Link>
-        {/* Botón de menú para móviles */}
         <div className="md:hidden flex items-center">
           <button
             onClick={() => setNavbarOpen(!navbarOpen)}
@@ -48,9 +47,8 @@ const Navbar = () => {
             )}
           </button>
         </div>
-        {/* Menú para dispositivos grandes */}
-        <div className="hidden md:flex md:space-x-4">
-          <ul className="flex space-x-4 text-sm sm:text-base">
+        <div className="hidden md:flex md:space-x-4 h-full">
+          <ul className="flex space-x-4 text-sm sm:text-base items-center h-full">
             {navLinks.map((link, index) => (
               <li key={index}>
                 <NavLink
@@ -67,7 +65,7 @@ const Navbar = () => {
       <div
         className={`md:hidden transition-transform transform ${
           navbarOpen ? "translate-y-0" : "-translate-y-full"
-        } bg-[#121212] border-t border-[#33353F]`}>
+        } bg-[#121212] border-t border-[#33353F] w-full`}>
         <ul className="flex flex-col text-sm sm:text-base">
           {navLinks.map((link, index) => (
             <li key={index}>
