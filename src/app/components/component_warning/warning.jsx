@@ -27,7 +27,10 @@ const OrientationWarning = () => {
 
   return (
     <div className={`orientation-warning ${isLandscape ? "hidden" : ""}`}>
-      <h1>Por favor, rota tu dispositivo a orientación horizontal.</h1>
+      <h1>
+        Rota tu dispositivo a orientación horizontal para una mejor
+        visualización.
+      </h1>
       <style jsx>{`
         .orientation-warning {
           display: flex;
