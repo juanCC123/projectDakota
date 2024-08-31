@@ -32,7 +32,7 @@ const EmailSection = () => {
     const resData = await response.json();
 
     if (response.status === 200) {
-      console.log("Message sent.");
+      console.log("Mnesaje enviado.");
       setEmailSubmitted(true);
     }
   };
@@ -56,12 +56,10 @@ const EmailSection = () => {
           quieres saludarme, haré todo lo posible por responderte.
         </p>
         <div className="socials flex flex-row gap-2">
-          <Link href="github.com">
+          <Link href="https://github.com/juanCC123/projectDakota">
             <Image src={GithubIcon} alt="Github Icon" />
           </Link>
-          <Link href="linkedin.com">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
-          </Link>
+          <p className="text-[#ADB7BE] text-sm mt-2">Nuestro repositorio</p>
         </div>
       </div>
       <div>

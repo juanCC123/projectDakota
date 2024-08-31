@@ -32,30 +32,28 @@ const Navbar = () => {
   const [navbarOpen, setNavbarOpen] = useState(false);
 
   return (
-    <nav className="fixed mx-auto border border-[#33353F] top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
-      <div className="flex container lg:py-4 flex-wrap items-center justify-between mx-auto px-4 py-2">
-        <Link
-          href="/"
-          className="text-2xl md:text-5xl text-white font-semibold">
+    <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] border-b border-[#33353F]">
+      <div className="container mx-auto flex items-center justify-between px-4 py-2 sm:px-6 sm:py-3">
+        <Link href="/" className="text-xl sm:text-2xl font-semibold text-white">
           DAKOTA ES
         </Link>
-        <div className="mobile-menu block md:hidden">
+        <div className="md:hidden flex items-center">
           {!navbarOpen ? (
             <button
               onClick={() => setNavbarOpen(true)}
-              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white">
-              <Bars3Icon className="h-5 w-5" />
+              className="text-white p-2 rounded hover:bg-gray-700">
+              <Bars3Icon className="h-6 w-6" />
             </button>
           ) : (
             <button
               onClick={() => setNavbarOpen(false)}
-              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white">
-              <XMarkIcon className="h-5 w-5" />
+              className="text-white p-2 rounded hover:bg-gray-700">
+              <XMarkIcon className="h-6 w-6" />
             </button>
           )}
         </div>
-        <div className="menu hidden md:block md:w-auto" id="navbar">
-          <ul className="flex p-4 md:p-0 md:flex-row md:space-x-8 mt-0">
+        <div className={`md:flex ${navbarOpen ? "block" : "hidden"}`}>
+          <ul className="flex flex-col md:flex-row md:space-x-4 mt-2 md:mt-0 md:space-x-6 text-sm sm:text-base">
             {navLinks.map((link, index) => (
               <li key={index}>
                 <NavLink
