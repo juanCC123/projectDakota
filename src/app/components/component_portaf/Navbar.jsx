@@ -65,9 +65,9 @@ const Navbar = () => {
       </div>
       {/* Menú desplegable en móviles */}
       <div
-        className={`md:hidden fixed top-16 left-0 right-0 bg-[#121212] border-t border-[#33353F] transition-transform transform ${
+        className={`md:hidden transition-transform transform ${
           navbarOpen ? "translate-y-0" : "-translate-y-full"
-        }`}>
+        } bg-[#121212] border-t border-[#33353F]`}>
         <ul className="flex flex-col text-sm sm:text-base">
           {navLinks.map((link, index) => (
             <li key={index}>
