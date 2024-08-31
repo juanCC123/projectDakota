@@ -16,9 +16,5 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, [router]);
 
-  return loading ? (
-    <LoadingScreen />
-  ) : (
-    <div className="flex justify-center items-center h-screen"></div>
-  );
+  return <LoadingScreen />;
 }

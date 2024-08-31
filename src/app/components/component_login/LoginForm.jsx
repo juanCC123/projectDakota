@@ -5,6 +5,8 @@ import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import formatAnimation from "@/../public/loginAnimated.json"; // Ajusta la ruta según tu estructura
+import { motion } from "framer-motion";
+import { useSpring } from "@react-spring/web";
 
 const LoginForm = () => {
   const [formState, setFormState] = useState({
@@ -55,9 +57,17 @@ const LoginForm = () => {
     return /^\+?\d{10,15}$/.test(phone);
   };
 
+  const formAnimation = useSpring({
+    opacity: 1,
+    from: { opacity: 0, transform: "translateY(50px)" },
+    config: { tension: 220, friction: 25 },
+  });
+
   return (
     <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300">
-      <div className="relative flex flex-col md:flex-row bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full">
+      <motion.div
+        className="relative flex flex-col md:flex-row bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full"
+        style={formAnimation}>
         <form
           id="mainForm"
           className="w-full md:w-1/2 p-6 flex flex-col gap-4 md:gap-6 bg-white rounded-lg shadow-lg"
@@ -118,14 +128,16 @@ const LoginForm = () => {
             <span>Enviar</span>
           </button>
         </form>
-        <div className="hidden md:flex items-center justify-center w-full md:w-1/2 p-6">
+        <motion.div
+          className="hidden md:flex items-center justify-center w-full md:w-1/2 p-6"
+          style={{ opacity: 1 }}>
           <Lottie
             animationData={formatAnimation}
             loop={true}
             className="w-full h-auto"
           />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };
