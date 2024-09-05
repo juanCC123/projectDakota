@@ -1,15 +1,15 @@
-/* import { NextResponse } from "next/server";
-import { dataB } from "@/app/model/configDB";
+import { NextResponse } from "next/server";
+import { dataB } from "@/app/model/configDB"; // Asegúrate de que la ruta sea correcta
 
 export async function POST(request) {
   let connection;
 
   try {
     // Obtener datos del request
-    const { nombre, correo, teléfono, contraseña } = await request.json();
+    const { nombre, correo, telefono, contraseña } = await request.json();
 
     // Validar que los campos no estén vacíos
-    if (!nombre || !correo || !teléfono || !contraseña) {
+    if (!nombre || !correo || !telefono || !contraseña) {
       return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
     }
 
@@ -42,9 +42,9 @@ export async function POST(request) {
       // El usuario no existe, lo registramos
       await connection.execute(
         "INSERT INTO usersDakota (name, email, phoneNumber, password) VALUES (?, ?, ?, ?)",
-        [nombre, correo, teléfono, contraseña]
+        [nombre, correo, telefono, contraseña]
       );
-      // Después de registrar, podemos enviar un mensaje para indicar que se ha registrado exitosamente y solicitar que inicie sesión nuevamente
+      // Después de registrar, enviamos un mensaje para indicar el registro exitoso
       return NextResponse.json({
         message:
           "Usuario registrado exitosamente. Por favor, inicia sesión con tus datos.",
@@ -55,7 +55,7 @@ export async function POST(request) {
     console.error("Error en la base de datos:", error.message);
     console.error("Stack Trace:", error.stack);
 
-    // Manejo de errores específicos para cada etapa
+    // Manejo de errores específicos
     if (error.code === "ER_DUP_ENTRY") {
       return NextResponse.json(
         { error: "Ya existe un usuario con este correo" },
@@ -63,7 +63,6 @@ export async function POST(request) {
       );
     }
 
-    // Manejo de errores de conexión a la base de datos
     if (error.message.includes("ECONNREFUSED")) {
       return NextResponse.json(
         { error: "No se pudo conectar a la base de datos" },
@@ -71,7 +70,6 @@ export async function POST(request) {
       );
     }
 
-    // Error general
     return NextResponse.json(
       { error: "Error en el servidor" },
       { status: 500 }
@@ -90,4 +88,3 @@ export async function POST(request) {
     }
   }
 }
- */
