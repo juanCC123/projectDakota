@@ -6,10 +6,10 @@ export async function POST(request) {
 
   try {
     // Obtener datos del request
-    const { nombre, correo, telefono, contraseña } = await request.json();
+    const { nombre, correo, teléfono, contraseña } = await request.json();
 
     // Validar que los campos no estén vacíos
-    if (!nombre || !correo || !telefono || !contraseña) {
+    if (!nombre || !correo || !teléfono || !contraseña) {
       return NextResponse.json({ error: "Faltan datos" }, { status: 400 });
     }
 
@@ -42,7 +42,7 @@ export async function POST(request) {
       // El usuario no existe, lo registramos
       await connection.execute(
         "INSERT INTO usersDakota (name, email, phoneNumber, password) VALUES (?, ?, ?, ?)",
-        [nombre, correo, telefono, contraseña]
+        [nombre, correo, teléfono, contraseña]
       );
       // Después de registrar, enviamos un mensaje para indicar el registro exitoso
       return NextResponse.json({

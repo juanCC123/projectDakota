@@ -23,14 +23,14 @@ const LoginForm = () => {
     setFormState({ ...formState, [e.target.id]: e.target.value });
   };
 
-  //Enviar el formulario
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
         // Hacemos el fetch a la API del backend
-        const response = await fetch("/api/route.js", {
+        const response = await fetch("/api/send", {
+          // Cambia la ruta a "/api/route"
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,10 +43,10 @@ const LoginForm = () => {
         if (response.ok) {
           router.push("/pages/mental");
         } else {
-          setServerError(data.message || "Error en el servidor");
+          setErrors({ server: data.message || "Error en el servidor" });
         }
       } catch (error) {
-        setServerError("Error de red. Intenta de nuevo más tarde.");
+        setErrors({ server: "Error de red. Intenta de nuevo más tarde." });
       }
     } else {
       setErrors(validationErrors);
@@ -65,7 +65,7 @@ const LoginForm = () => {
       errors.teléfono = "No es un número de teléfono válido";
     }
     if (formState.contraseña.trim().length < 8) {
-      errors.contraseña = "Contraseña inválida";
+      errors.contraseña = "La contraseña debe tener al menos 8 caracteres";
     }
     return errors;
   };
@@ -73,16 +73,13 @@ const LoginForm = () => {
   const isValidEmail = (email) =>
     /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email);
 
-  const isValidPhone = (phone) => {
-    return /^\+?\d{10,15}$/.test(phone);
-  };
+  const isValidPhone = (phone) => /^\+?\d{10,15}$/.test(phone);
 
   const formAnimation = useSpring({
     opacity: 1,
     from: { opacity: 0, transform: "translateY(50px)" },
     config: { tension: 220, friction: 25 },
   });
-
   return (
     <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300">
       <motion.div
