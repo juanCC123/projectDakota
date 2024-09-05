@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import GithubIcon from "../../../../public/github-icon.svg";
+import GithubIcon from "../../../../../public/github-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -15,7 +15,7 @@ const EmailSection = () => {
       message: e.target.message.value,
     };
     const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
+    const endpoint = "";
 
     const options = {
       method: "POST",
@@ -31,7 +31,7 @@ const EmailSection = () => {
     const resData = await response.json();
 
     if (response.status === 200) {
-      console.log("Mnesaje enviado.");
+      console.log("Mensaje enviado.");
       setEmailSubmitted(true);
     }
   };

@@ -67,7 +67,7 @@ const Header = () => {
             className="text-xs sm:text-sm font-semibold text-white"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.3 }}>
-            Diario de <span className="font-normal">[Nombre]</span>
+            DAKOTA WEB
           </motion.p>
         </div>
       </div>

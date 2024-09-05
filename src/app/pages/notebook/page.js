@@ -1,4 +1,4 @@
-import Notebook from "@/app/components/component_appMental/Notebook";
+import Notebook from "@/app/views/components/component_appMental/Notebook";
 
 export default function NotebookFunction() {
   return (

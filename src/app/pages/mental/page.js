@@ -1,5 +1,5 @@
-import Header from "@/app/components/component_appMental/Header";
-import Cards from "@/app/components/component_appMental/Cards";
+import Header from "@/app/views/components/component_appMental/Header";
+import Cards from "@/app/views/components/component_appMental/Cards";
 
 export default function Mental() {
   return (

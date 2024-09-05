@@ -1,4 +1,4 @@
-import ToDoList from "@/app/components/component_appMental/ToDoList";
+import ToDoList from "@/app/views/components/component_appMental/ToDoList";
 
 export default function ToDoListFunction() {
   return (

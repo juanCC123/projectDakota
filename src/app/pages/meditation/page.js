@@ -1,4 +1,4 @@
-import Timer from "@/app/components/component_appMental/Meditation";
+import Timer from "@/app/views/components/component_appMental/Meditation";
 
 export default function MeditationFunction() {
   return <Timer />;

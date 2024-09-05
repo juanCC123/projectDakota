@@ -1,9 +1,9 @@
-import HeroSection from "@/app/components/component_portaf/HeroSection";
-import AboutSection from "@/app/components/component_portaf/AboutSection";
-import ProjectsSection from "@/app/components/component_portaf/ProjectsSection";
-import EmailSection from "@/app/components/component_portaf/EmailSection";
-import Footer from "@/app/components/component_portaf/Footer";
-import Navbar from "@/app/components/component_portaf/Navbar";
+import HeroSection from "@/app/views/components/component_portaf/HeroSection";
+import AboutSection from "@/app/views/components/component_portaf/AboutSection";
+import ProjectsSection from "@/app/views/components/component_portaf/ProjectsSection";
+import EmailSection from "@/app/views/components/component_portaf/EmailSection";
+import Footer from "@/app/views/components/component_portaf/Footer";
+import Navbar from "@/app/views/components/component_portaf/Navbar";
 
 export default function portfolio() {
   return (
