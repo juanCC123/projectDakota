@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+/* import { NextResponse } from "next/server";
 import { dataB } from "@/app/model/configDB";
 
 export async function POST(request) {
@@ -90,3 +90,4 @@ export async function POST(request) {
     }
   }
 }
+ */
