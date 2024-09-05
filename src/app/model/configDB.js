@@ -1,15 +1,15 @@
+// configdb.js
 import mysql from "mysql2/promise";
 
 // Configuración de la conexión a la base de datos en Railway
 const connectionConfig = {
-  host: "junction.proxy.rlwy.net", // Usa el host que te da Railway
-  user: "root", // El usuario proporcionado por Railway
-  password: "FfEmxSaSEnhhgLURLIMcHfdiGqvlbpAn", // La contraseña proporcionada por Railway
-  database: "railway", // El nombre de la base de datos en Railway
-  port: 29472, // Generalmente MySQL usa el puerto 3306, pero revisa en Railway por si es otro
+  host: "junction.proxy.rlwy.net",
+  user: "root",
+  password: "FfEmxSaSEnhhgLURLIMcHfdiGqvlbpAn",
+  database: "railway",
+  port: "29472",
 };
 
-// Crear y exportar la conexión a la base de datos
 export const dataB = async () => {
   let connection;
   try {
@@ -22,7 +22,6 @@ export const dataB = async () => {
   }
 };
 
-// Asegúrate de cerrar la conexión en el manejo de la petición
 export const closeConnection = async (connection) => {
   try {
     await connection.end();

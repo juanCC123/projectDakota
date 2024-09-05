@@ -1,36 +1,43 @@
 "use client";
 import React, { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
-import formatAnimation from "@/../public/loginAnimated.json"; // Ajusta la ruta según tu estructura
+import formatAnimation from "@/../public/loginAnimated.json";
 import { motion } from "framer-motion";
 import { useSpring } from "@react-spring/web";
 
 const LoginForm = () => {
   const [formState, setFormState] = useState({
+    correo: "",
+    contraseña: "",
+  });
+
+  const [registerState, setRegisterState] = useState({
     nombre: "",
     correo: "",
-    teléfono: "",
+    telefono: "",
     contraseña: "",
   });
 
   const [errors, setErrors] = useState({});
+  const [showRegister, setShowRegister] = useState(false);
   const router = useRouter();
 
-  const handleChange = (e) => {
-    setFormState({ ...formState, [e.target.id]: e.target.value });
+  const handleChange = (e, isRegister = false) => {
+    const target = e.target;
+    if (isRegister) {
+      setRegisterState({ ...registerState, [target.id]: target.value });
+    } else {
+      setFormState({ ...formState, [target.id]: target.value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const validationErrors = validateForm();
+    const validationErrors = validateLoginForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        // Hacemos el fetch a la API del backend
         const response = await fetch("/api/send", {
-          // Cambia la ruta a "/api/route"
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -43,7 +50,7 @@ const LoginForm = () => {
         if (response.ok) {
           router.push("/pages/mental");
         } else {
-          setErrors({ server: data.message || "Error en el servidor" });
+          setErrors({ server: data.error || "Error en el servidor" });
         }
       } catch (error) {
         setErrors({ server: "Error de red. Intenta de nuevo más tarde." });
@@ -53,18 +60,70 @@ const LoginForm = () => {
     }
   };
 
-  const validateForm = () => {
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateRegisterForm();
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        const response = await fetch("/api/send", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(registerState),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          setShowRegister(false);
+          setFormState({
+            ...formState,
+            correo: registerState.correo,
+            contraseña: registerState.contraseña,
+          });
+        } else {
+          setErrors({ server: data.error || "Error en el servidor" });
+        }
+      } catch (error) {
+        setErrors({ server: "Error de red. Intenta de nuevo más tarde." });
+      }
+    } else {
+      setErrors(validationErrors);
+    }
+  };
+
+  const validateLoginForm = () => {
     const errors = {};
-    if (!formState.nombre.trim()) {
+    if (!formState.correo) {
+      errors.correo = "El correo es obligatorio";
+    } else if (!isValidEmail(formState.correo)) {
+      errors.correo = "Correo electrónico inválido";
+    }
+    if (!formState.contraseña) {
+      errors.contraseña = "La contraseña es obligatoria";
+    }
+    return errors;
+  };
+
+  const validateRegisterForm = () => {
+    const errors = {};
+    if (!registerState.nombre.trim()) {
       errors.nombre = "El nombre no puede estar en blanco";
     }
-    if (!isValidEmail(formState.correo)) {
-      errors.correo = "No es un correo electrónico válido";
+    if (!registerState.correo.trim()) {
+      errors.correo = "El correo es obligatorio";
+    } else if (!isValidEmail(registerState.correo)) {
+      errors.correo = "Correo electrónico inválido";
     }
-    if (!isValidPhone(formState.teléfono)) {
-      errors.teléfono = "No es un número de teléfono válido";
+    if (!registerState.telefono.trim()) {
+      errors.telefono = "El telefono es obligatorio";
+    } else if (!isValidPhone(registerState.telefono)) {
+      errors.telefono = "Número de telefono inválido";
     }
-    if (formState.contraseña.trim().length < 8) {
+    if (!registerState.contraseña.trim()) {
+      errors.contraseña = "La contraseña es obligatoria";
+    } else if (registerState.contraseña.trim().length < 8) {
       errors.contraseña = "La contraseña debe tener al menos 8 caracteres";
     }
     return errors;
@@ -80,81 +139,134 @@ const LoginForm = () => {
     from: { opacity: 0, transform: "translateY(50px)" },
     config: { tension: 220, friction: 25 },
   });
+
   return (
-    <div className="flex flex-col md:flex-row justify-center items-center min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300">
-      <motion.div
-        className="relative flex flex-col md:flex-row bg-white p-6 rounded-lg shadow-lg max-w-4xl w-full"
-        style={formAnimation}>
-        <form
-          id="mainForm"
-          className="w-full md:w-1/2 p-6 flex flex-col gap-4 md:gap-6 bg-white rounded-lg shadow-lg"
-          onSubmit={handleSubmit}
-          noValidate>
-          <h2 className="text-2xl font-bold text-center text-sky-700 mb-4">
-            Bienvenid@
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300">
+      <div className="flex-1 flex items-center justify-center p-6">
+        <motion.div
+          style={formAnimation}
+          className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold mb-4">
+            {showRegister ? "Registro" : "Iniciar sesión"}
           </h2>
-          {["nombre", "correo", "teléfono", "contraseña"].map((field, idx) => (
-            <div
-              key={idx}
-              className={`relative mb-4 border-2 rounded-lg ${
-                errors[field]
-                  ? "border-red-500"
-                  : formState[field]
-                  ? "border-green-500"
-                  : "border-gray-300"
-              }`}>
-              {errors[field] && (
-                <div className="absolute -top-6 left-0 w-full text-red-500 text-sm text-center bg-white p-1 border border-red-500 rounded-lg">
-                  {errors[field]}
-                </div>
-              )}
-              <label
-                htmlFor={field}
-                className="flex items-center mb-1 px-4 pt-2">
-                <span className={`block capitalize text-sky-700 text-lg mr-2`}>
-                  {field}
-                </span>
-                {!errors[field] && formState[field] && (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    className="text-green-500 text-lg"
+          <form onSubmit={showRegister ? handleRegister : handleSubmit}>
+            {showRegister && (
+              <>
+                <div className="mb-4">
+                  <label
+                    htmlFor="nombre"
+                    className="block text-sm font-medium text-gray-700">
+                    Nombre
+                  </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    value={registerState.nombre}
+                    onChange={(e) => handleChange(e, true)}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
                   />
-                )}
+                  {errors.nombre && (
+                    <p className="text-red-500 text-xs">{errors.nombre}</p>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="correo"
+                    className="block text-sm font-medium text-gray-700">
+                    Correo electrónico
+                  </label>
+                  <input
+                    type="email"
+                    id="correo"
+                    value={registerState.correo}
+                    onChange={(e) => handleChange(e, true)}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                  />
+                  {errors.correo && (
+                    <p className="text-red-500 text-xs">{errors.correo}</p>
+                  )}
+                </div>
+                <div className="mb-4">
+                  <label
+                    htmlFor="telefono"
+                    className="block text-sm font-medium text-gray-700">
+                    Teléfono
+                  </label>
+                  <input
+                    type="text"
+                    id="telefono"
+                    value={registerState.telefono}
+                    onChange={(e) => handleChange(e, true)}
+                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                  />
+                  {errors.telefono && (
+                    <p className="text-red-500 text-xs">{errors.telefono}</p>
+                  )}
+                </div>
+              </>
+            )}
+            <div className="mb-4">
+              <label
+                htmlFor="correo"
+                className="block text-sm font-medium text-gray-700">
+                Correo electrónico
               </label>
               <input
-                type={field === "contraseña" ? "password" : "text"}
-                id={field}
-                placeholder={`Ingresa tu ${field}`}
-                autoComplete="off"
-                value={formState[field]}
-                onChange={handleChange}
-                className={`w-full p-3 border-0 rounded-lg outline-none ring-1 ring-gray-300 ${
-                  errors[field]
-                    ? "ring-red-500"
-                    : formState[field]
-                    ? "ring-green-500"
-                    : "ring-gray-300"
-                }`}
+                type="email"
+                id="correo"
+                value={showRegister ? registerState.correo : formState.correo}
+                onChange={(e) => handleChange(e, showRegister)}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
               />
+              {errors.correo && (
+                <p className="text-red-500 text-xs">{errors.correo}</p>
+              )}
             </div>
-          ))}
-          <button
-            type="submit"
-            className="w-full py-3 bg-sky-500 text-white rounded-lg hover:bg-sky-600 transition-colors flex items-center justify-center space-x-2">
-            <FontAwesomeIcon icon={faCheckCircle} className="text-white" />
-            <span>Enviar</span>
-          </button>
-        </form>
-        <motion.div
-          className="hidden md:flex items-center justify-center w-full md:w-1/2 p-6"
-          style={{ opacity: 1 }}>
-          <Lottie
-            animationData={formatAnimation}
-            loop={true}
-            className="w-full h-auto"
-          />
+            <div className="mb-4">
+              <label
+                htmlFor="contraseña"
+                className="block text-sm font-medium text-gray-700">
+                Contraseña
+              </label>
+              <input
+                type="password"
+                id="contraseña"
+                value={
+                  showRegister ? registerState.contraseña : formState.contraseña
+                }
+                onChange={(e) => handleChange(e, showRegister)}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+              />
+              {errors.contraseña && (
+                <p className="text-red-500 text-xs">{errors.contraseña}</p>
+              )}
+            </div>
+            <div className="flex items-center justify-between">
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+                {showRegister ? "Registrarse" : "Iniciar sesión"}
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowRegister(!showRegister)}
+                className="text-blue-500 hover:underline">
+                {showRegister ? "Ya tengo cuenta" : "Crear cuenta"}
+              </button>
+            </div>
+            {errors.server && (
+              <p className="text-red-500 text-xs mt-4">{errors.server}</p>
+            )}
+          </form>
         </motion.div>
-      </motion.div>
+      </div>
+      <div className="hidden md:flex flex-1 items-center justify-center">
+        <Lottie
+          animationData={formatAnimation}
+          loop
+          className="w-full max-w-md"
+        />
+      </div>
     </div>
   );
 };
