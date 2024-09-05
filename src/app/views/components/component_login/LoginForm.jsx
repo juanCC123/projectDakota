@@ -1,10 +1,12 @@
 "use client";
+
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Lottie from "lottie-react";
 import formatAnimation from "@/../public/loginAnimated.json";
 import { motion } from "framer-motion";
 import { useSpring } from "@react-spring/web";
+import { FaUser, FaLock, FaPhone, FaEnvelope } from "react-icons/fa";
 
 const LoginForm = () => {
   const [formState, setFormState] = useState({
@@ -117,9 +119,9 @@ const LoginForm = () => {
       errors.correo = "Correo electrónico inválido";
     }
     if (!registerState.telefono.trim()) {
-      errors.telefono = "El telefono es obligatorio";
+      errors.telefono = "El teléfono es obligatorio";
     } else if (!isValidPhone(registerState.telefono)) {
-      errors.telefono = "Número de telefono inválido";
+      errors.telefono = "Número de teléfono inválido";
     }
     if (!registerState.contraseña.trim()) {
       errors.contraseña = "La contraseña es obligatoria";
@@ -136,122 +138,95 @@ const LoginForm = () => {
 
   const formAnimation = useSpring({
     opacity: 1,
-    from: { opacity: 0, transform: "translateY(50px)" },
+    from: { opacity: 0, transform: "translateY(30px)" },
     config: { tension: 220, friction: 25 },
   });
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300">
+    <div className="flex flex-col md:flex-row min-h-screen bg-gradient-to-r from-cyan-300 to-blue-300 p-4 md:p-8">
       <div className="flex-1 flex items-center justify-center p-6">
         <motion.div
           style={formAnimation}
-          className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="text-2xl font-semibold mb-4">
+          className="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg border border-gray-200">
+          <h2 className="text-3xl font-bold mb-6 text-center">
             {showRegister ? "Registro" : "Iniciar sesión"}
           </h2>
           <form onSubmit={showRegister ? handleRegister : handleSubmit}>
             {showRegister && (
               <>
-                <div className="mb-4">
-                  <label
-                    htmlFor="nombre"
-                    className="block text-sm font-medium text-gray-700">
-                    Nombre
-                  </label>
+                <div className="mb-4 flex items-center border border-gray-300 rounded-md">
+                  <FaUser className="text-gray-500 ml-3" />
                   <input
                     type="text"
                     id="nombre"
+                    placeholder="Nombre"
                     value={registerState.nombre}
                     onChange={(e) => handleChange(e, true)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                    className="flex-1 p-2 border-none rounded-md focus:outline-none"
                   />
-                  {errors.nombre && (
-                    <p className="text-red-500 text-xs">{errors.nombre}</p>
-                  )}
                 </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="correo"
-                    className="block text-sm font-medium text-gray-700">
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    id="correo"
-                    value={registerState.correo}
-                    onChange={(e) => handleChange(e, true)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-                  />
-                  {errors.correo && (
-                    <p className="text-red-500 text-xs">{errors.correo}</p>
-                  )}
-                </div>
-                <div className="mb-4">
-                  <label
-                    htmlFor="telefono"
-                    className="block text-sm font-medium text-gray-700">
-                    Teléfono
-                  </label>
+                {errors.nombre && (
+                  <p className="text-red-500 text-xs mt-1">{errors.nombre}</p>
+                )}
+                <div className="mb-4 flex items-center border border-gray-300 rounded-md">
+                  <FaPhone className="text-gray-500 ml-3" />
                   <input
                     type="text"
                     id="telefono"
+                    placeholder="Teléfono"
                     value={registerState.telefono}
                     onChange={(e) => handleChange(e, true)}
-                    className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                    className="flex-1 p-2 border-none rounded-md focus:outline-none"
                   />
-                  {errors.telefono && (
-                    <p className="text-red-500 text-xs">{errors.telefono}</p>
-                  )}
                 </div>
+                {errors.telefono && (
+                  <p className="text-red-500 text-xs mt-1">{errors.telefono}</p>
+                )}
               </>
             )}
-            <div className="mb-4">
-              <label
-                htmlFor="correo"
-                className="block text-sm font-medium text-gray-700">
-                Correo electrónico
-              </label>
+            <div className="mb-4 flex items-center border border-gray-300 rounded-md">
+              <FaEnvelope className="text-gray-500 ml-3" />
               <input
                 type="email"
                 id="correo"
+                placeholder="Correo electrónico"
                 value={showRegister ? registerState.correo : formState.correo}
                 onChange={(e) => handleChange(e, showRegister)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                className="flex-1 p-2 border-none rounded-md focus:outline-none"
               />
-              {errors.correo && (
-                <p className="text-red-500 text-xs">{errors.correo}</p>
-              )}
             </div>
-            <div className="mb-4">
-              <label
-                htmlFor="contraseña"
-                className="block text-sm font-medium text-gray-700">
-                Contraseña
-              </label>
+            {errors.correo && (
+              <p className="text-red-500 text-xs mt-1">{errors.correo}</p>
+            )}
+            <div className="mb-4 flex items-center border border-gray-300 rounded-md">
+              <FaLock className="text-gray-500 ml-3" />
               <input
                 type="password"
                 id="contraseña"
+                placeholder="Contraseña"
                 value={
                   showRegister ? registerState.contraseña : formState.contraseña
                 }
                 onChange={(e) => handleChange(e, showRegister)}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                className="flex-1 p-2 border-none rounded-md focus:outline-none"
               />
-              {errors.contraseña && (
-                <p className="text-red-500 text-xs">{errors.contraseña}</p>
-              )}
             </div>
-            <div className="flex items-center justify-between">
+            {errors.contraseña && (
+              <p className="text-red-500 text-xs mt-1">{errors.contraseña}</p>
+            )}
+            <div className="flex items-center justify-between mt-4">
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600">
+                className="px-6 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 transition duration-300">
                 {showRegister ? "Registrarse" : "Iniciar sesión"}
               </button>
               <button
                 type="button"
                 onClick={() => setShowRegister(!showRegister)}
                 className="text-blue-500 hover:underline">
-                {showRegister ? "Ya tengo cuenta" : "Crear cuenta"}
+                {showRegister
+                  ? "¿Ya tienes una cuenta? Inicia sesión"
+                  : "¿No tienes una cuenta? Regístrate"}
               </button>
             </div>
             {errors.server && (
@@ -260,12 +235,8 @@ const LoginForm = () => {
           </form>
         </motion.div>
       </div>
-      <div className="hidden md:flex flex-1 items-center justify-center">
-        <Lottie
-          animationData={formatAnimation}
-          loop
-          className="w-full max-w-md"
-        />
+      <div className="hidden md:flex md:w-1/2 justify-center items-center">
+        <Lottie animationData={formatAnimation} loop={true} />
       </div>
     </div>
   );
