@@ -32,6 +32,38 @@ const LoginForm = () => {
       setErrors(validationErrors);
     }
   };
+  // Enviar el formulario DB
+  /*   const handleSubmit = async (e) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length === 0) {
+      try {
+        // Hacemos el fetch a la API del backend
+        const response = await fetch("/api/route.js", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formState),
+        });
+
+        const data = await response.json(); // Parseamos la respuesta JSON
+
+        if (response.ok) {
+          // Si la validación en el servidor fue exitosa, redirigimos
+          router.push("/pages/mental");
+        } else {
+          // Si hay errores, mostramos el mensaje del servidor
+          setServerError(data.message || "Error en el servidor");
+        }
+      } catch (error) {
+        // Si ocurre un error de red, mostramos un mensaje
+        setServerError("Error de red. Intenta de nuevo más tarde.");
+      }
+    } else {
+      setErrors(validationErrors); // Mostramos los errores de validación
+    }
+  }; */
 
   const validateForm = () => {
     const errors = {};
