@@ -47,7 +47,6 @@
 
 .timer-display {
     font-size: 1.5rem;
-    /* Tamaño reducido de los números */
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
@@ -73,7 +72,6 @@
 
 .input-time-edit {
     font-size: 1rem;
-    /* Tamaño de fuente más pequeño */
     border: 2px solid #333;
     background: transparent;
     text-align: center;
@@ -117,12 +115,12 @@
 
 .animated-icon {
     font-size: 2rem;
-    /* Tamaño aumentado para los íconos */
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .animated-icon:hover {
     transform: scale(1.2);
+    color: #0eec81;
 }
 
 .controls {
@@ -138,16 +136,14 @@
     border-radius: 50%;
     padding: 15px;
     font-size: 2rem;
-    /* Tamaño aumentado para los íconos de control */
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .control-button:hover {
     background: #218838;
+    transform: scale(1.1);
 }
-
-
 
 .color-picker-container {
     display: none;
@@ -166,32 +162,30 @@
 
 .color-picker {
     border: none;
-    width: 100px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
 }
 
 .info-button {
     background: transparent;
-    /* Fondo transparente */
     color: #ffc107;
-    /* Color amarillo para el ícono de información */
     font-size: 2.5rem;
-    /* Tamaño aumentado para el ícono de información */
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .info-button:hover {
     color: #e0a800;
-    /* Color amarillo oscuro para el ícono de información al pasar el cursor */
+    transform: scale(1.1);
 }
 
 .instructions {
     position: absolute;
     top: 30px;
-
     left: 0;
     right: 0;
     background: rgba(255, 255, 255, 0.9);
     padding: 30px;
-
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     z-index: 1;
@@ -216,26 +210,25 @@
 }
 
 .meditation-image img {
-    width: 100px;
+    width: 200px;
     height: auto;
     margin-top: 20px;
 }
 
 .animated-icon.edit-icon {
     position: absolute;
-
     bottom: -32px;
     left: -130px;
-
     background: none;
-
     color: #137cdf;
     padding: 40px;
-
     font-size: 6rem;
-
+    transition: transform 0.3s ease;
 }
 
+.animated-icon.edit-icon:hover {
+    transform: rotate(20deg);
+}
 
 .color-picker {
     border: none;
