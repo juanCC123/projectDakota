@@ -1,7 +1,14 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import "@/../../public/style/timer.css";
-import { FaPlay, FaPause, FaRedo, FaEdit, FaPalette } from "react-icons/fa";
+import {
+  FaPlay,
+  FaPause,
+  FaRedo,
+  FaEdit,
+  FaPalette,
+  FaInfoCircle,
+} from "react-icons/fa";
 
 const Timer = () => {
   const [seconds, setSeconds] = useState(25 * 60);
@@ -9,6 +16,7 @@ const Timer = () => {
   const [inputMinutes, setInputMinutes] = useState("");
   const [inputSeconds, setInputSeconds] = useState("");
   const [isEditing, setIsEditing] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   useEffect(() => {
     let interval = null;
@@ -68,6 +76,10 @@ const Timer = () => {
       event.target.value;
   };
 
+  const toggleInstructions = () => {
+    setShowInstructions(!showInstructions);
+  };
+
   return (
     <div className="pomodoro-container">
       <div className="background">
@@ -111,15 +123,13 @@ const Timer = () => {
             </div>
           ) : (
             <div className="time-display-container">
+              <FaEdit
+                className="animated-icon edit-icon"
+                onClick={() => setIsEditing(true)}
+              />
               <span onClick={() => setIsEditing(true)} className="time-display">
                 {formatTime()}
               </span>
-              {!isActive && !isEditing && (
-                <FaEdit
-                  className="animated-icon edit-icon"
-                  onClick={() => setIsEditing(true)}
-                />
-              )}
             </div>
           )}
         </div>
@@ -154,7 +164,32 @@ const Timer = () => {
               className="color-picker"
             />
           </div>
+          <button onClick={toggleInstructions} className="info-button">
+            <FaInfoCircle className="info-icon" />
+          </button>
         </div>
+        {showInstructions && (
+          <div className="instructions">
+            <h2>Instrucciones para Meditación y Respiración</h2>
+            <p>
+              <strong>1. Meditación:</strong> Siéntate en un lugar tranquilo.
+              Inicia el temporizador y concédele tu atención a tu respiración.
+              Intenta vaciar tu mente de pensamientos y enfocarte solo en el
+              presente.
+            </p>
+            <p>
+              <strong>2. Respiración Profunda:</strong> Respira profundamente
+              por la nariz durante 3 segundos, sostén la respiración durante 3
+              segundos y exhala lentamente por la boca. Repite durante el tiempo
+              del temporizador.
+            </p>
+            <button
+              onClick={toggleInstructions}
+              className="close-instructions-button">
+              Cerrar
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

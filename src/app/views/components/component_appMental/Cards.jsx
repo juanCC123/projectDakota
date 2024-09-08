@@ -23,12 +23,6 @@ const cards = [
   },
   {
     id: "4",
-    title: "Desahogate",
-    imageUrl: "/images/cards/microphone.jpg",
-    url: "/pages/micro",
-  },
-  {
-    id: "5",
     title: "En proceso . . .",
     imageUrl: "/images/cards/mantenimiento.png",
     url: "/pages/maintenance",
