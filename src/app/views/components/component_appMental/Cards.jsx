@@ -12,19 +12,25 @@ const cards = [
   {
     id: "2",
     title: "Meditación",
-    imageUrl: "/images/med.png",
+    imageUrl: "/images/cards/med.png",
     url: "/pages/meditation",
   },
   {
     id: "3",
-    title: "Orden",
-    imageUrl: "/images/orden.jpg",
+    title: "Lista de tareas",
+    imageUrl: "/images/cards/orden.jpg",
     url: "/pages/ToDoList",
   },
   {
     id: "4",
+    title: "Desahogate",
+    imageUrl: "/images/cards/microphone.jpg",
+    url: "/pages/micro",
+  },
+  {
+    id: "5",
     title: "En proceso . . .",
-    imageUrl: "/images/mantenimiento.png",
+    imageUrl: "/images/cards/mantenimiento.png",
     url: "/pages/maintenance",
   },
 ];

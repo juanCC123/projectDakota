@@ -1,94 +1,31 @@
-.circle-container {
-    position: absolute;
-    bottom: 50px;
-
-    left: 50%;
-    transform: translateX(-50%);
-    height: 60px;
-
-    width: 150px;
-
-    display: flex;
-    justify-content: space-between;
-}
-
-
-.circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    animation: wave 4s infinite, colorChange 4s infinite;
-
-}
-
-
-@keyframes wave {
-
-    0%,
-    100% {
-        transform: translateY(0);
+/* Animación del corazón rojo */
+@keyframes heartPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
     }
 
     50% {
-        transform: translateY(-20px);
-    }
-}
-
-
-@keyframes colorChange {
-    0% {
-        background-color: #FF0000;
-
-    }
-
-    33% {
-        background-color: #00FF00;
-
-    }
-
-    66% {
-        background-color: #0000FF;
-
+        transform: scale(1.5);
+        opacity: 0.7;
     }
 
     100% {
-        background-color: #FF0000;
-
+        transform: scale(1);
+        opacity: 0;
     }
 }
 
-
-.toggle-btn {
+.heart-animation {
     position: fixed;
-
-    bottom: 20px;
-
-    left: 20px;
-
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    font-size: 16px;
-    transition: transform 0.3s;
-
-}
-
-.toggle-btn:hover {
-    transform: scale(1.1);
-
-}
-
-
-.icon {
-    transition: transform 0.3s;
-
-}
-
-.icon:hover {
-    transform: scale(1.2);
-
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: red;
+    z-index: 999;
+    pointer-events: none;
+    /* No bloquear interacción con otros elementos */
+    animation: heartPulse 2s forwards;
+    /* Duración de 1 segundo */
 }
