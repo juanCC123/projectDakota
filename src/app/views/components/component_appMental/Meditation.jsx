@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "@/../../public/style/timer.css";
 import {
   FaPlay,
@@ -18,14 +18,18 @@ const Timer = () => {
   const [isEditing, setIsEditing] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
 
+  const audioRef = useRef(null); // Referencia para el audio
+
   useEffect(() => {
     let interval = null;
+
     if (isActive && !isEditing) {
       interval = setInterval(() => {
         setSeconds((prevSeconds) => {
           if (prevSeconds === 0) {
             clearInterval(interval);
             setIsActive(false);
+            playAlarm(); // Iniciar la alarma al llegar a 0
             return 0;
           }
           return prevSeconds - 1;
@@ -34,14 +38,31 @@ const Timer = () => {
     } else if (!isActive || isEditing) {
       clearInterval(interval);
     }
+
     return () => clearInterval(interval);
   }, [isActive, isEditing]);
+
+  const playAlarm = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 2; // Reiniciar el sonido al principio
+      audioRef.current.play(); // Reproducir el sonido
+    }
+  };
+
+  const stopAlarm = () => {
+    if (audioRef.current) {
+      audioRef.current.pause(); // Pausar el sonido
+      audioRef.current.currentTime = 0; // Reiniciar el sonido al principio
+    }
+  };
 
   const toggle = () => {
     setIsActive(!isActive);
   };
 
+  // Al reiniciar el temporizador, detener el sonido
   const reset = () => {
+    stopAlarm(); // Detener el sonido al reiniciar
     setIsActive(false);
     setSeconds((inputMinutes || 0) * 60 + (inputSeconds || 0));
   };
@@ -58,7 +79,9 @@ const Timer = () => {
     setSeconds((inputMinutes || 0) * 60 + (value || 0));
   };
 
+  // Al cambiar el tiempo, detener el sonido
   const setMeditationTime = () => {
+    stopAlarm(); // Detener el sonido al cambiar el tiempo
     setSeconds((inputMinutes || 0) * 60 + (inputSeconds || 0));
     setIsEditing(false);
   };
@@ -191,6 +214,8 @@ const Timer = () => {
           </div>
         )}
       </div>
+      {/* Audio element to play the alarm */}
+      <audio ref={audioRef} src="/alarm.mp3" preload="auto" />
     </div>
   );
 };
