@@ -31,7 +31,9 @@ const TAB_DATA = [
     id: "CE",
     content: (
       <ul className="list-disc pl-2">
-        <li>Mónica Hurtado</li>
+        <li>Docente: Mónica Hurtado</li>
+        <li>Mentor: John Garcia</li>
+        <li>Desarrollador fullstack: Carlos Mario</li>
       </ul>
     ),
   },
@@ -47,6 +49,15 @@ const TAB_DATA = [
             target="_blank"
             rel="noopener noreferrer">
             Colegio Técnico Industrial José Elías Puyana
+          </a>
+        </li>
+        <li>
+          <a
+            class="text-green-500 hover:text-orange-500 hover:animate-blink"
+            href="https://unab.edu.co/"
+            target="_blank"
+            rel="noopener noreferrer">
+            Universidad Autónoma de Bucaramanga - UNAB
           </a>
         </li>
       </ul>
