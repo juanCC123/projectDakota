@@ -12,7 +12,7 @@ const cards = [
   {
     id: "2",
     title: "Meditación",
-    imageUrl: "/images/cards/med.png",
+    imageUrl: "/images/cards/med.jpg",
     url: "/pages/meditation",
   },
   {
@@ -24,7 +24,7 @@ const cards = [
   {
     id: "4",
     title: "En proceso . . .",
-    imageUrl: "/images/cards/mantenimiento.png",
+    imageUrl: "/images/cards/mantenimiento.jpg",
     url: "/pages/maintenance",
   },
 ];
