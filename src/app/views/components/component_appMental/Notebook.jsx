@@ -57,7 +57,7 @@ export default function Home() {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `Contenido: \n${content}\n`,
+                  text: content,
                   font: selectedFont,
                 }),
               ],
@@ -65,7 +65,7 @@ export default function Home() {
             new Paragraph({
               children: [
                 new TextRun({
-                  text: `Gratitud: \n${gratitude}\n`,
+                  text: gratitude,
                   font: selectedFont,
                 }),
               ],

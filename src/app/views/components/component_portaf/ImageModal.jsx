@@ -1,6 +1,5 @@
-// ImageModal.js
 import React from "react";
-import { XCircleIcon } from "@heroicons/react/24/outline"; // Cambia a XCircleIcon
+import { XCircleIcon } from "@heroicons/react/24/outline"; 
 
 const ImageModal = ({ isOpen, imgUrl, onClose }) => {
   if (!isOpen) return null; // No renderizar si la modal no está abierta

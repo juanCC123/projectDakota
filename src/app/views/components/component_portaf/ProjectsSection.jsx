@@ -7,8 +7,8 @@ import { motion, useInView } from "framer-motion";
 const projectsData = [
   {
     id: 1,
-    title: "React Portfolio Website",
-    description: "Project 1 description",
+    title: "DAKOTI AX",
+    description: "Chat con IA",
     image: "/images/projects/1.jpg",
     tag: ["Aplicaciones", "Web"],
     gitUrl: "/",
@@ -16,8 +16,8 @@ const projectsData = [
   },
   {
     id: 2,
-    title: "Photography Portfolio Website",
-    description: "Project 2 description",
+    title: "MindFulness",
+    description: "App de meditación",
     image: "/images/projects/2.jpg",
     tag: ["Aplicaciones", "Web"],
     gitUrl: "/",
@@ -25,8 +25,8 @@ const projectsData = [
   },
   {
     id: 3,
-    title: "E-commerce Application",
-    description: "Project 3 description",
+    title: "Diario de notas",
+    description: "App de escritura",
     image: "/images/projects/3.jpg",
     tag: ["Aplicaciones", "Web"],
     gitUrl: "/",
@@ -34,8 +34,8 @@ const projectsData = [
   },
   {
     id: 4,
-    title: "Food Ordering Application",
-    description: "Project 4 description",
+    title: "Lista de tareas",
+    description: "App para organizarte",
     image: "/images/projects/4.jpg",
     tag: ["Aplicaciones", "Web"],
     gitUrl: "/",
