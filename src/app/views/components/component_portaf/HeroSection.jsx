@@ -30,7 +30,7 @@ const HeroSection = () => {
                 "Ivan Salazar",
                 1000,
                 "Joaquín Osio",
-                1000
+                1000,
               ]}
               wrapper="span"
               speed={50}
@@ -41,20 +41,20 @@ const HeroSection = () => {
             Nuestro proyecto quiere servir a tu salud mental.
           </p>
           <div>
-          <Link
-  href="/#contact"
-  className="px-1 inline-block py-1 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-400 to-blue-300 hover:bg-slate-200 text-white">
-  <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">Comunícate con nosotros</span>
-</Link>
-<Link
-  href="/"
-  className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-400 to-blue-300 hover:bg-slate-800 text-white mt-3">
-  <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-    Download CV
-  </span>
-</Link>
-
-
+            <Link
+              href="/#contact"
+              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-blue-400 to-blue-300 hover:bg-slate-200 text-white">
+              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
+                Comunícate con nosotros
+              </span>
+            </Link>
+            <Link
+              href="https://blancohannah73.wixsite.com/emprendimiento-notas/blog"
+              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-blue-400 to-blue-300 hover:bg-slate-800 text-white mt-3">
+              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
+                Ir a wix
+              </span>
+            </Link>
           </div>
         </motion.div>
         <motion.div
