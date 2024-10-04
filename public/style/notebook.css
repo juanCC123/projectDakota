@@ -1,0 +1,31 @@
+/* Animación del corazón rojo */
+@keyframes heartPulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+.heart-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: red;
+    z-index: 999;
+    pointer-events: none;
+    /* No bloquear interacción con otros elementos */
+    animation: heartPulse 2s forwards;
+    /* Duración de 1 segundo */
+}

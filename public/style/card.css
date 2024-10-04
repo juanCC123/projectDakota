@@ -1,0 +1,62 @@
+/* Contenedor principal de las tarjetas */
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    margin-top: 80px;
+    /* Ajusta este valor según la altura de tu encabezado */
+}
+
+/* Contenedor de las tarjetas */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Estilos de la tarjeta */
+.card {
+    width: 300px;
+    height: 200px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.1) rotate(2deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border: 2px solid #0070f3;
+}
+
+.card-image-wrapper {
+    width: 100%;
+    height: 80%;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-title {
+    padding: 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #fff;
+}
+
+/* Contenedor del componente externo (si aplica) */
+.external-component-container {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
