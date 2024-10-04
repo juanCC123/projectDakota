@@ -29,6 +29,7 @@ const cards = [
   },
 ];
 
+// Para que al dar clic ingresen a otra pestaña
 const Cards = () => {
   const handleCardClick = (card) => {
     if (card.url) {
