@@ -39,7 +39,7 @@ const LoginForm = () => {
     const validationErrors = validateLoginForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await fetch("/api/send", {
+        const response = await fetch("/api/send/DB", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

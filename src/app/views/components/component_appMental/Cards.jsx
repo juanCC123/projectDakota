@@ -23,9 +23,9 @@ const cards = [
   },
   {
     id: "4",
-    title: "En proceso . . .",
+    title: "Chat dakota beta",
     imageUrl: "/images/cards/mantenimiento.jpg",
-    url: "/pages/maintenance",
+    url: "/pages/ChatBot",
   },
 ];
 
